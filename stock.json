@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Platos",
+        "price": 362.0,
+        "quantity": 56
+    },
+    {
+        "id": 2,
+        "name": "Vasos",
+        "price": 564.0,
+        "quantity": 56
+    },
+    {
+        "id": 3,
+        "name": "Manteles",
+        "price": 300.0,
+        "quantity": 15
+    },
+    {
+        "id": 4,
+        "name": "Tenedores",
+        "price": 60.0,
+        "quantity": 200
+    },
+    {
+        "id": 5,
+        "name": "Queso",
+        "price": 78.0,
+        "quantity": 200
+    },
+    {
+        "id": 6,
+        "name": "Mermelada",
+        "price": 45.0,
+        "quantity": 80
+    }
+]
