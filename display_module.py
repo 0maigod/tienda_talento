@@ -7,6 +7,7 @@ from rich.theme import Theme
 def display_items(stock, titulo="List of Products"):
   """Displays items from the stock manager in an admin interface."""
   custom_theme = Theme({
+      "info": "dim cyan",
       "par": "red",
       "impar": "green",
   })
@@ -17,10 +18,10 @@ def display_items(stock, titulo="List of Products"):
     return
 
   table = Table(title=titulo, show_header=True, show_lines=True, style="bold magenta on black")
-  table.add_column("ID", style="info", no_wrap=True)
-  table.add_column("Nombre", style="red", no_wrap=True)
-  table.add_column("Precio", style="cyan", no_wrap=True)
-  table.add_column("Cantidad", style="cyan", no_wrap=True)
+  table.add_column("ID", no_wrap=True)
+  table.add_column("Nombre", no_wrap=True)
+  table.add_column("Precio", no_wrap=True)
+  table.add_column("Cantidad", no_wrap=True)
 
   # Definir los estilos para filas alternas
   alternate_style = True

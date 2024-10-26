@@ -2,6 +2,7 @@ import display_module
 import stock_manager
 import search_manager
 
+
 if __name__ == '__main__':
   stock = stock_manager.load_stock(
     filename='stock.json'

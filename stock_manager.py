@@ -1,18 +1,8 @@
 import display_module
 import json
+from product import Product
+from utils import validate_price, validate_quantity
 
-class Product:
-    def __init__(self, id, name, price, quantity):
-        self.id = id
-        self.name = name
-        self.price = price
-        self.quantity = quantity
-
-    def __str__(self):
-      return (
-          f"ID: {self.id}, Name: {self.name}, "
-          f"Price: {self.price}, Quantity: {self.quantity}"
-      )
 
 def load_stock(filename=None):  
     """Loads stock data from a json file.
@@ -66,11 +56,11 @@ def modify_product(stock):
           if new_name:
               product.name = new_name
     
-          new_price = input("Enter new price (leave blank to keep current): ")
+          new_price = validate_price("Enter new price (leave blank to keep current): ")
           if new_price:
               product.price = float(new_price)
     
-          new_quantity = input("Enter new quantity (leave blank to keep current): ")
+          new_quantity = validate_quantity("Enter new quantity (leave blank to keep current): ")
           if new_quantity:
               product.quantity = int(new_quantity)
     
@@ -98,8 +88,10 @@ def add_product(stock):
     id = len(stock) + 1  # Assuming IDs start from 1
     name = input("Enter product name: ")
     name = name.capitalize()
-    price = float(input("Enter product price: "))
-    quantity = int(input("Enter product quantity: "))
+
+    price = validate_price("Enter product price: ")
+    quantity = validate_quantity("Enter product quantity: ")
+
     product = Product(id, name, price, quantity)
     
     stock.append(product)  # Add the product to the stock list
@@ -110,7 +102,7 @@ def remove_product(stock):
     """Removes a product from the stock."""
     titulo = "List of Items"
     display_module.display_items(stock, titulo)
-    id_to_remove = int(input("Enter the ID of the product to remove: "))
+    id_to_remove = validate_quantity("Enter the ID of the product to remove: ")
     for i, product in enumerate(stock):
       if product.id == id_to_remove:
           del stock[i]
