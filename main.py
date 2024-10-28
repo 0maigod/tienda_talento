@@ -26,7 +26,7 @@ if __name__ == '__main__':
       if not logged_in:
         continue
     elif choice == '2':
-      user_manager.register_user()
+      logged_in = user_manager.register_user()
     elif choice == '3':
       break
 
@@ -73,6 +73,7 @@ if __name__ == '__main__':
               else:
                 print("Invalid search choice.")
       elif choice == '6':
+        logged_in = False
         break
       else:
         print("Invalid choice.")

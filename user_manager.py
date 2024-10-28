@@ -1,3 +1,4 @@
+import bcrypt
 import json
 import os
 from user import User
@@ -17,7 +18,7 @@ def load_users(filename=None):
                 users = {
                     data['username']: User(
                         data['username'],
-                        data['password']
+                        data['password'].encode('utf-8')  # Encode password as bytes
                     )
                 }
     except (FileNotFoundError, json.JSONDecodeError):
@@ -31,9 +32,8 @@ def save_users(users, filename='users.json'):
     for user in users.values():
         users_data.append({
             'username': user.username,
-            'password': user.password
+            'password': user.password  # Decode password to string
         })
-
     # Provide a valid directory path for the filename
     directory = os.path.dirname(os.path.abspath(filename))
     os.makedirs(directory, exist_ok=True)
@@ -64,7 +64,10 @@ def register_user():
     if username in users:
         print("Username already exists.")
     else:
-        password = input("Enter a password: ")
-        users[username] = User(username, password)
-        save_users(users, 'users.json')  # Provide the filename here
+        password = input("Enter a password: ").encode('utf-8')  # Encode password as bytes
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(password, salt)
+        users[username] = User(username, hashed_password.decode('utf-8'))
+        save_users(users)
         print("Registration successful!")
+        return True
