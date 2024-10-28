@@ -32,7 +32,7 @@ def save_users(users, filename='users.json'):
     for user in users.values():
         users_data.append({
             'username': user.username,
-            'password': user.password  # Decode password to string
+            'password': user.password.decode('utf-8')  # Decode password to string
         })
     # Provide a valid directory path for the filename
     directory = os.path.dirname(os.path.abspath(filename))
