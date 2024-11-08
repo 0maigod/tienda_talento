@@ -44,4 +44,4 @@ def display_items(stock, titulo="List of Products"):
         alternate_style = not alternate_style
   
   console.print(table)
-  # print(table)
+  print(table)

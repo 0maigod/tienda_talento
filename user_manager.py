@@ -3,71 +3,71 @@ import json
 import os
 from user import User
 
-def load_users(filename=None):
-    users = {}
+filename='storage/users.json'
 
-    if filename is None or not os.path.exists(filename):
-        return users
+# user_manager.py
+class UserManager:
+    def __init__(self):
+        self.users = self.load_users(filename)
+    
+    def load_users(self, filename):
+        try:
+            with open(filename, 'r') as file:
+                users_data = json.load(file)
+        except FileNotFoundError:
+            users_data = []
 
-    try:
-        with open(str(filename), 'r') as f:
-            data = json.load(f)  # Load the JSON data
-            if isinstance(data, list):  # Check if it's a list of user objects
-                users = {user['username']: User(user['username'], user['password']) for user in data}
-            else:  # Assume it's a single user object
-                users = {
-                    data['username']: User(
-                        data['username'],
-                        data['password'].encode('utf-8')  # Encode password as bytes
-                    )
-                }
-    except (FileNotFoundError, json.JSONDecodeError):
-        # Handle file not found or invalid JSON
-        pass
+        self.users = {}
+        for user_data in users_data:
+            self.users[user_data['username']] = User(user_data['username'], user_data['password'])
 
-    return users
+        return self.users
+    
+    def save_users(self, filename):
+        try:
+            with open(filename, 'r') as file:
+                users_data = json.load(file)
+        except FileNotFoundError:
+            users_data = []
 
-def save_users(users, filename='users.json'):
-    users_data = []
-    for user in users.values():
-        users_data.append({
-            'username': user.username,
-            'password': user.password.decode('utf-8')  # Decode password to string
-        })
-    # Provide a valid directory path for the filename
-    directory = os.path.dirname(os.path.abspath(filename))
-    os.makedirs(directory, exist_ok=True)
-    with open(filename, 'w') as file:
-        json.dump(users_data, file, indent=4)
+        for user in self.users.values():
+            user_found = False
+            for existing_user in users_data:
+                if existing_user['username'] == user.username:
+                    existing_user['password'] = user.password.decode('utf-8')
+                    user_found = True
+                    break
 
-def login_user():
-    users = load_users('users.json')
+            if not user_found:
+                users_data.append({
+                    'username': user.username,
+                    'password': user.password.decode('utf-8')
+                })
 
-    username = input("Enter your username: ")
-    if username not in users:
-        print("User not found.")
-        return False
+        with open(filename, 'w') as file:
+            json.dump(users_data, file, indent=4)
+    def login_user(self, username, password):
+        self.users = self.load_users(filename)  # Load users from the specified file
 
-    user = users[username]
-    password = input("Enter your password: ")
-    if user.check_password(password):
-        print("Login successful!")
-        return True
-    else:
-        print("Incorrect password.")
-        return False
+        if username not in self.users:
+            print("User not found.")
+            return False
 
-def register_user():
-    users = load_users('users.json')  # Provide the filename here
-
-    username = input("Enter a username: ")
-    if username in users:
-        print("Username already exists.")
-    else:
-        password = input("Enter a password: ").encode('utf-8')  # Encode password as bytes
-        salt = bcrypt.gensalt()
-        hashed_password = bcrypt.hashpw(password, salt)
-        users[username] = User(username, hashed_password.decode('utf-8'))
-        save_users(users)
-        print("Registration successful!")
-        return True
+        user = self.users[username]
+        if user.check_password(password):
+            print("Login successful!")
+            return True
+        else:
+            print("Incorrect password.")
+            return False
+    
+    def register_user(self, username, password):
+        if username in self.users:
+            print("Username already exists.")
+        else:
+            salt = bcrypt.gensalt()
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+            self.users[username] = User(username, hashed_password.decode('utf-8'))
+            self.save_users(filename)
+            print("Registration successful!")
+            return True
