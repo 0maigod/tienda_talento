@@ -79,31 +79,15 @@
 #         print("Invalid choice.")
 
 import gradio as gr
-from user_manager import UserManager
-
+from display_module import LoginLayout
 
 
 with gr.Blocks() as demo:
-    gr.Markdown("# Login Screen")
-    with gr.Row():
-        usr = gr.Textbox(placeholder="Username", label="Username")
-        pwd = gr.Textbox(placeholder="Password", type="password", label="Password")
-    btn = gr.Button("Login")
-    out = gr.Label("")
 
-    btn.click(fn=UserManager().login_user,
-              inputs=[usr, pwd],
-              outputs=out)
+    login_layout = LoginLayout()
+    login_layout.add_title("# <center>Login/Registro</center>")
+    login_layout.get_layout()
 
-    reg_usr = gr.Textbox(placeholder="Username", label="Username")
-    reg_pwd = gr.Textbox(placeholder="Password", type="password", label="Password")
-    reg_btn = gr.Button("Register")
-    reg_out = gr.Label("")
-
-    reg_btn.click(fn=UserManager().register_user,
-                  inputs=[reg_usr, reg_pwd],
-                  outputs=reg_out)
- 
 
 if __name__ == "__main__":
     demo.launch()

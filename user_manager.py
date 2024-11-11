@@ -1,11 +1,9 @@
 import bcrypt
 import json
-import os
 from user import User
 
 filename='storage/users.json'
 
-# user_manager.py
 class UserManager:
     def __init__(self):
         self.users = self.load_users(filename)
@@ -48,7 +46,7 @@ class UserManager:
             json.dump(users_data, file, indent=4)
     def login_user(self, username, password):
         self.users = self.load_users(filename)  # Load users from the specified file
-
+        
         if username not in self.users:
             print("User not found.")
             return False
@@ -64,10 +62,11 @@ class UserManager:
     def register_user(self, username, password):
         if username in self.users:
             print("Username already exists.")
+            return "Username already exists, please choose another."
         else:
             salt = bcrypt.gensalt()
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
             self.users[username] = User(username, hashed_password.decode('utf-8'))
             self.save_users(filename)
             print("Registration successful!")
-            return True
+            return "Registration successful!. Try to log in"

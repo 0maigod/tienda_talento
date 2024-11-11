@@ -14,5 +14,13 @@
     {
         "username": "dora",
         "password": "$2b$12$o..XlyeT4p1gwQ0W0rEx5.77/rqrHV/P6J8DczpfGrHgce08eLBkC"
+    },
+    {
+        "username": "lorena",
+        "password": "$2b$12$BKkVQBVGDJEcyJhhnWzag./E7jTRWyXBWNPUpI2AbBheRiym8WJvK"
+    },
+    {
+        "username": "lore",
+        "password": "$2b$12$cRvcLr5DFAJ84hmOQRs/IOxpaZTK7BRqJ1tMSb8DGKdDquhcR6QgW"
     }
 ]
