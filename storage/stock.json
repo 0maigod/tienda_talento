@@ -52,5 +52,83 @@
         "name": "Tijeras",
         "price": 75.0,
         "quantity": 900
+    },
+    {
+        "id": 10,
+        "name": "Salchichas",
+        "price": 600.0,
+        "quantity": 500
+    },
+    {
+        "id": 11,
+        "name": "Celulares",
+        "price": 500,
+        "quantity": 34
+    },
+    {
+        "id": 12,
+        "name": "Buey",
+        "price": 500,
+        "quantity": 6
+    },
+    {
+        "id": 13,
+        "name": "Saco",
+        "price": 58,
+        "quantity": 67
+    },
+    {
+        "id": 14,
+        "name": "Jabon",
+        "price": 543,
+        "quantity": 43
+    },
+    {
+        "id": 15,
+        "name": "Patitos",
+        "price": 54,
+        "quantity": 566
+    },
+    {
+        "id": 16,
+        "name": "Lapicero",
+        "price": 54,
+        "quantity": 66
+    },
+    {
+        "id": 17,
+        "name": "Lombriz",
+        "price": 4,
+        "quantity": 909
+    },
+    {
+        "id": 18,
+        "name": "Perro",
+        "price": 45,
+        "quantity": 45
+    },
+    {
+        "id": 19,
+        "name": "Chorizo",
+        "price": 577,
+        "quantity": 88
+    },
+    {
+        "id": 20,
+        "name": "Mesa de luz",
+        "price": 889,
+        "quantity": 87
+    },
+    {
+        "id": 21,
+        "name": "Ratoncito",
+        "price": 58,
+        "quantity": 88
+    },
+    {
+        "id": 22,
+        "name": "Cerveza",
+        "price": 89,
+        "quantity": 88
     }
 ]

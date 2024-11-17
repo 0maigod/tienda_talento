@@ -79,14 +79,14 @@
 #         print("Invalid choice.")
 
 import gradio as gr
-from display_module import LoginLayout
+from display_module import MainLayout
 
 
 with gr.Blocks() as demo:
 
-    login_layout = LoginLayout()
-    login_layout.add_title("# <center>Login/Registro</center>")
-    login_layout.get_layout()
+    main_layout = MainLayout()
+    # main_layout.add_title("# <center>Login/Registro</center>")
+    main_layout.get_layout()
 
 
 if __name__ == "__main__":
